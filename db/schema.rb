@@ -14,7 +14,9 @@ ActiveRecord::Schema.define(version: 2020_03_28_163337) do
 
   create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "first_user_id"
+    t.bigint "user_id"
     t.index ["first_user_id"], name: "index_friends_on_first_user_id"
+    t.index ["user_id"], name: "index_friends_on_user_id"
   end
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -39,5 +41,6 @@ ActiveRecord::Schema.define(version: 2020_03_28_163337) do
     t.string "password"
   end
 
+  add_foreign_key "friends", "users"
   add_foreign_key "groups", "users"
 end
