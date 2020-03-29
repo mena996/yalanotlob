@@ -6,5 +6,6 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :menu
       t.string :order_status
     end
+    add_reference :orders, :user , foreign_key: true
   end
 end

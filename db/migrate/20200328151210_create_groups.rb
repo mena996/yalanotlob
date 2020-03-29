@@ -3,5 +3,6 @@ class CreateGroups < ActiveRecord::Migration[6.0]
     create_table :groups do |t|
       t.string :name
     end
+    add_reference :groups , :admin, foreign_key: { to_table: :users} 
   end
 end
