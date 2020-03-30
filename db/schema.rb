@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2020_03_29_013759) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-<<<<<<< HEAD
   create_table "user_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "item_name"
     t.integer "amount"
@@ -53,9 +52,6 @@ ActiveRecord::Schema.define(version: 2020_03_29_013759) do
     t.bigint "order_id"
     t.index ["order_id"], name: "index_user_orders_on_order_id"
     t.index ["user_id"], name: "index_user_orders_on_user_id"
-=======
-  create_table "user_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
->>>>>>> 469859db0c30d7b1b9109724779316fd5665c241
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
