@@ -10,6 +10,34 @@
   </head>
 
   <body>
+   <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/">Our Logo</a>
+  <form class="form-inline">
+<% if user_signed_in? %>
+    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+  <% else %>
+    <a class="btn btn-outline-primary" href="/users/sign_in" role="button">
+    Login
+    </a>
+    <div style="padding-left: 10px;">
+      <a class="btn btn-outline-success" href="/users/sign_up" role="button">
+      Sign Up
+      </a>
+      <% end %>
+
+    </div>
+  </form>
+</nav>
+
+  <% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
     <%= yield %>
+  
+
   </body>
-</html>
+</html> 
