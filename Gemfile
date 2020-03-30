@@ -1,12 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-<<<<<<< HEAD
 ruby '>=2.6.3'
 
-=======
- ruby '>=2.6.3' 
->>>>>>> 469859db0c30d7b1b9109724779316fd5665c241
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 # Use sqlite3 as the database for Active Record

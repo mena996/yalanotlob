@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_03_29_013759) do
-=======
-ActiveRecord::Schema.define(version: 2020_03_28_180229) do
->>>>>>> 469859db0c30d7b1b9109724779316fd5665c241
 
   create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "first_user_id"
