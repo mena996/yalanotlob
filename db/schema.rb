@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2020_03_30_104619) do
 
-  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "first_user_id"
     t.bigint "second_user_id"
     t.index ["first_user_id"], name: "index_friends_on_first_user_id"
     t.index ["second_user_id"], name: "index_friends_on_second_user_id"
   end
 
-  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.bigint "admin_id"
     t.index ["admin_id"], name: "index_groups_on_admin_id"
@@ -34,13 +34,20 @@ ActiveRecord::Schema.define(version: 2020_03_30_104619) do
     t.index ["user_id"], name: "index_invites_on_user_id"
   end
 
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "meal"
     t.string "resturant"
     t.string "menu"
     t.string "order_status"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "user_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
   create_table "user_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -54,7 +61,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_104619) do
     t.index ["user_id"], name: "index_user_orders_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -73,6 +80,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_104619) do
   add_foreign_key "invites", "orders"
   add_foreign_key "invites", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
   add_foreign_key "user_orders", "orders"
   add_foreign_key "user_orders", "users"
 end
