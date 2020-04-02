@@ -4,40 +4,118 @@
     <title>Yalanotlob</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
-
   <body>
-   <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="/">Our Logo</a>
-  <form class="form-inline">
-<% if user_signed_in? %>
-    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-  <% else %>
-    <a class="btn btn-outline-primary" href="/users/sign_in" role="button">
-    Login
-    </a>
-    <div style="padding-left: 10px;">
-      <a class="btn btn-outline-success" href="/users/sign_up" role="button">
-      Sign Up
-      </a>
-      <% end %>
-
-    </div>
-  </form>
-</nav>
-
-  <% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-    <%= yield %>
-  
-
-  </body>
-</html> 
+    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
+      <div class="navbar-header d-flex col">
+        <a class="navbar-brand" href="#"><i class="fa fa-cube"></i>Brand<b>Name</b></a>
+        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+          <span class="navbar-toggler-icon"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <% if user_signed_in? %>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+          <ul class="nav navbar-nav">
+            <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Frindes</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Groups</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Orders</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right ml-auto">
+            <li class="nav-item dropdown" ><a href="#" class="nav-link notifications" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
+              <ul class="dropdown-menu notification-menu">
+                <li class="head text-light bg-dark">
+                  <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-12">
+                      <span>Notifications (3)</span>
+                      <a href="" class="float-right text-light">Mark all as read</a>
+                    </div>
+                  </li>
+                  <li class="notification-box">
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-3 col-3 text-center">
+                        <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">
+                      </div>
+                      <div class="col-lg-8 col-sm-8 col-8">
+                        <strong class="text-info">David John</strong>
+                        <div>
+                          Lorem ipsum dolor sit amet, consectetur
+                        </div>
+                        <small class="text-warning">27.11.2015, 15:00</small>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-box bg-gray">
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-3 col-3 text-center">
+                        <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">
+                      </div>
+                      <div class="col-lg-8 col-sm-8 col-8">
+                        <strong class="text-info">David John</strong>
+                        <div>
+                          Lorem ipsum dolor sit amet, consectetur
+                        </div>
+                        <small class="text-warning">27.11.2015, 15:00</small>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-box">
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-3 col-3 text-center">
+                        <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">
+                      </div>
+                      <div class="col-lg-8 col-sm-8 col-8">
+                        <strong class="text-info">David John</strong>
+                        <div>
+                          Lorem ipsum dolor sit amet, consectetur
+                        </div>
+                        <small class="text-warning">27.11.2015, 15:00</small>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="footer bg-dark text-center">
+                    <a href="" class="text-light">View All</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar">Username</a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to '<i class="fa fa-user-o"></i>Edit profile'.html_safe, edit_user_registration_path, :class => 'dropdown-item' %></li>
+                  <li class="divider dropdown-divider"></li>
+                  <li>  <%= link_to '<i class="material-icons">&#xE8AC;</i> Logout'.html_safe, destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+          <a class="btn btn-outline-primary" href="/users/sign_in" role="button">
+            Login
+          </a>
+          <div style="padding-left: 10px;">
+            <a class="btn btn-outline-success" href="/users/sign_up" role="button">
+              Sign Up
+            </a>
+          <% end %>
+        </nav>
+        <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+        <%= yield %>
+      </body>
+    </html>
