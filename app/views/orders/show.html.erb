@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="card-title text-primary"><strong>Meal: 
+          <% if(@order.meal == 0) %>
+            Breakfast
+          <% else %>
+            Lunch
+          <% end %>
+        </strong></div>
+    <div class="card-subtitle mb-2 text-secondary"><strong>Restaurant: <%= @order[:restaurant] %></strong></div>
+    <div class="card-subtitle mb-2 text-muted">Order Status:
+        <% if(@order.status == 0) %>
+            Waiting
+        <% else %>
+            Finished
+        <% end %>
+    </div>
+    <div class='align-middle'> <img src="/images/menus/<%= @order.menu %>" width=400 /></div>
+</div>

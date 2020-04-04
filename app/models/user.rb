@@ -15,4 +15,6 @@ class User < ApplicationRecord
                           :join_table => "friends",
                           :foreign_key => "first_user_id",
                           :association_foreign_key => "second_user_id"
+  has_many :user_orders
+  
 end
