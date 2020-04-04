@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'user_orders/create'
-  get 'user_orders/destroy'
+  post 'user_orders/create'
+  get 'user_orders/index'
+  delete 'user_orders/destroy'
   get 'home/index'
   post 'orders/:id/finish_order', to: 'orders#finish', as: 'finish_order'
   resources :orders
