@@ -14,5 +14,6 @@
             Finished
         <% end %>
     </div>
+    <td class="align-middle"><%= link_to 'details' ,"/user_orders/#{@order.id}", class: "btn btn-primary text-light" %></td>
     <div class='align-middle'> <img src="/images/menus/<%= @order.menu %>" width=400 /></div>
 </div>
