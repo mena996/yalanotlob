@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 2020_03_30_104619) do
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "meal"
-    t.string "resturant"
+    t.string "restaurant"
     t.string "menu"
-    t.string "order_status"
+    t.integer "status"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
