@@ -19,9 +19,7 @@
 body {
   background: #eeeeee;
 }
-.form-inline {
-  display: inline-block;
-}
+
 .navbar-header.col {
   padding: 0 !important;
 }
@@ -130,18 +128,18 @@ body {
   background-color: #eee;
 }
 
-@media (min-width: 1200px) {
-  .form-inline .input-group {
-    width: 300px;
-    margin-left: 30px;
-  }
-}
-@media (max-width: 1199px) {
-  .form-inline {
-    display: block;
-    margin-bottom: 10px;
-  }
-  .input-group {
-    width: 100%;
-  }
-}
+// @media (min-width: 1200px) {
+//   .form-inline .input-group {
+//     width: 300px;
+//     margin-left: 30px;
+//   }
+// }
+// @media (max-width: 1199px) {
+//   .form-inline {
+//     display: block;
+//     margin-bottom: 10px;
+//   }
+//   .input-group {
+//     width: 100%;
+//   }
+// }
