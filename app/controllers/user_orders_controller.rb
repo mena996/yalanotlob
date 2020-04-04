@@ -27,7 +27,7 @@ class UserOrdersController < ApplicationController
   def destroy
     @user_order = UserOrder.find(params[:id])
     @user_order.destroy
-    redirect_to action: :index
+    redirect_to action: :show
 
   end
 
