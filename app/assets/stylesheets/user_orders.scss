@@ -6,16 +6,22 @@
     flex-wrap: wrap;
 }
 
-.card{
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-    width: 30%;
-    border: none;
-    height: 40px;
-    margin: 5px;
+// .card{
+//     display: flex;
+//     flex-direction: column;
+//     padding-left: 10px;
+//     width: 30%;
+//     border: none;
+//     height: 40px;
+//     margin: 5px;
+// }
+.overflowin-y{
+    overflow-y: scroll;
+    height: 50rem;
 }
-
+.card-height{
+    height:15%;
+}
 .h{
     color:midnightblue;
     font-weight: bold;
