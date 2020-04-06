@@ -2,8 +2,12 @@
 
 <div class="container">   
 <div class="float-md-right" >
-<%= render partial: 'model', locals: { btnValue: 'friends are invented'} %>
-<%= render partial: 'model', locals: { btnValue: 'frinds joined'} %>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user_order">
+  <%= @invited.length.to_s+' friends are invented'%>
+</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user_order">
+  <%= @joined.length.to_s+' friends are joineded'%>
+</button>
 </div>
 <br/><br/><br/>
 
@@ -31,8 +35,8 @@
             <td><%= detail.comment %></td>
             <td>
             <% if detail.user.id == current_user.id  %>
-              <%= link_to "delete", "/user_orders/#{detail.id}", remote: true, method: :delete ,
-              data: { confirm: 'Are you sure?'}%> 
+              <%= link_to "delete", "/user_orders/#{detail.id}", remote: true, method: :delete , class:"remove",
+              data: { confirm: 'Are you sure?'} %> 
              <% end %>
              </td>
         </tr>
@@ -43,7 +47,7 @@
 <%# order details form %>
 <div class="well">
 
-<%= form_with(url: "/user_orders",local: true, class: "form-inline") do |f|  %>
+<%= form_with(url: "/user_orders",local:true, class: "form-inline") do |f|  %>
     <%= hidden_field_tag(:user_id, current_user.id ) %>
     <%= hidden_field_tag(:order_id, @order.id) %>
     <%= f.text_field(:item_name, class:"form-control" , placeholder:"item...." ) %>
@@ -54,6 +58,45 @@
 <% end %>
     
 </div>
-  
-   
+
+
+<!-- Modal -->
+<div class="modal fade" id="user_order" tabindex="-1" role="dialog" aria-labelledby="user_orderTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLongTitle"> Invitations </h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%# my part %>
+        <h4 class="h">Friends invented</h4>
+        <div class="flex">
+            <% @invited.each do |friend| %> 
+              <div class="card">
+                <span><%= friend.user.name%></span>
+                        <a>remove</a>
+                          <%# <%= link_to "delete", "/invites/#{friend.id}", remote: true, method: :delete , class:"remove"%>
+                </div>
+              <% end %>
+        </div> 
+
+        <h4 class="h">Friends joined</h4>
+        <div class="flex">
+            <% @joined.each do |friend| %>
+              <div class="card">
+                <p><%= friend.user.name%></p>
+              </div>
+            <% end %>
+         </div> 
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
+
