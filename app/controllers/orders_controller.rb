@@ -25,13 +25,12 @@ class OrdersController < ApplicationController
     fill_order_data(@order, params)
 
     if @order.save
-      # assume we have array of friends ids firends=User.find([#ids of users])
-      friends=User.find([3,4])
+      # # assume we have array of friends ids firends=User.find([#ids of users])
+      # friends=User.find([3,4])
 
-      friends.each do |friend|
-        # Notification.create(recipient:friend, actor:current_user, action:"invited you to his", notifiable: @order)
-        Invite.create(user:friend,order:@order)
-      end
+      # friends.each do |friend|
+      #   Invite.create(user:friend,order:@order)
+      # end
 
       
       File.open(Rails.root.join('public', 'images', 'menus', uploaded_file.original_filename), 'wb') do |file|
