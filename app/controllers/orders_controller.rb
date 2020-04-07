@@ -33,19 +33,24 @@ class OrdersController < ApplicationController
     fill_order_data(@order, params)
 
     if @order.save
-      friends=User.find(JSON.parse params[:invitations])
+        friends=User.find(JSON.parse params[:invitations])
 
-      friends.each do |friend|
-        Invite.create(user:friend,order:@order)
-      end
 
-      
-      File.open(Rails.root.join('public', 'images', 'menus', uploaded_file.original_filename), 'wb') do |file|
-        file.write(uploaded_file.read)
-      end
-      redirect_to :orders
+#####  here I'm expecting to get all the users in the group  #####
+#         group = Group.where(name: params[:order][:group])
+#         group_users = group.users  # this line needs to be replace with a working one
+#         friends += group_users
+
+        friends.each do |friend|
+            Invite.create(user:friend,order:@order)
+        end
+
+        File.open(Rails.root.join('public', 'images', 'menus', uploaded_file.original_filename), 'wb') do |file|
+            file.write(uploaded_file.read)
+        end
+        redirect_to :orders
     else
-      render :new
+    render :new
     end
   end
 

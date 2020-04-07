@@ -3,4 +3,5 @@ class Order < ApplicationRecord
     belongs_to :user
     has_many :invites, dependent: :delete_all
     has_many :user_orders, dependent: :delete_all
+    attr_accessor :group
 end
