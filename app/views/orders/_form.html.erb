@@ -7,10 +7,11 @@
         </ul>
     </div>
 <% end %>
-
+<div class="container float-left col-6">
 <%= form_for(@order, url: @order) do |f| %>
     <%= select_tag(:meal, options_for_select([['Breakfast', 0], ['Lunch', 1]], :selected=>0), class: 'form-control mt-3', required: true) %>
     <%= f.text_field(:restaurant, placeholder: 'Restaurant Name...', class: 'form-control mt-3', required: true) %>
     <%= f.file_field(:menu, class: 'mt-3', required: true, accept: 'image/png, image/jpeg,image/jpg') %>
     <%= f.submit(:Submit, class: 'btn btn-success mt-3 col-12') %>
 <% end %>
+</div>

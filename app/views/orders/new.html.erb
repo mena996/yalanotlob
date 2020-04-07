@@ -2,4 +2,60 @@
 
 <%= render 'form', order: @order %>
 
-<%= link_to 'Back', orders_path, class: "btn btn-primary text-white mt-2" %>
+<div class="border float-right col-6">
+<input type="search" name="search" placeholder="Search for a friend..." class="col-12 form-control m-3"/>
+<div id="friend-list" class="container row col-12" style="height:70vh;overflow-y:scroll;">
+
+<% @friends.each do |friend| %>
+    <div class="card m-3" style="width:200px;height:100px;" id="<%= friend.id %>">
+        <div class="row no-gutters col-12">
+            <div class="col-md-4 m-2 ml-1">
+                <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h5 class="card-title"><%= friend.name %></h5>
+                    <button class="btn btn-primary" id="<%= friend.id %>" onclick='invite(this)'>Invite</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>
+</div>
+<div id="invited-list" class="border container row justify-content-center float-left ml-5" style="width:500px;">
+
+</div>
+
+
+
+
+<script>
+
+    var invited_users = []
+
+    function invite(element){
+        let friend = document.querySelector("div[id='"+element.id+"']")
+        InvitedFriend = friend.cloneNode(true)
+        button = InvitedFriend.childNodes[1].childNodes[3].childNodes[1].childNodes[3]
+        button.textContent = "un-invite"
+        button.setAttribute('class', "btn btn-danger")
+        button.setAttribute('onclick', 'unInvite(this)')
+        document.querySelector("#invited-list").appendChild(InvitedFriend)
+        friend.parentNode.removeChild(friend)
+        invited_users.push(parseInt(element.id))
+    }
+
+    function unInvite(element){
+        InvitedFriend = document.querySelector("div[id='"+element.id+"']")
+        friend = InvitedFriend.cloneNode(true)
+        button = friend.childNodes[1].childNodes[3].childNodes[1].childNodes[3]
+        button.textContent = "invite"
+        button.setAttribute('class', "btn btn-primary")
+        button.setAttribute('onclick', 'invite(this)')
+        document.querySelector("#friend-list").appendChild(friend)
+        InvitedFriend.parentNode.removeChild(InvitedFriend)
+        invited_users.splice(invited_users.indexOf(parseInt(element.id)), 1)
+    }
+
+</script>

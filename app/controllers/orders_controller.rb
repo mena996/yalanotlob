@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @friends = current_user.friends.order(:name)
   end
 
   # GET /orders/1/edit
