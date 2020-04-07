@@ -7,6 +7,13 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    invites = @order.invites
+    invited_ids = []
+
+    invites.each do |invite|
+        invited_ids.push(invite.user_id)
+    end
+    @invited_users=User.find(invited_ids)
   end
 
   # GET /orders/new
@@ -26,12 +33,11 @@ class OrdersController < ApplicationController
     fill_order_data(@order, params)
 
     if @order.save
-      # # assume we have array of friends ids firends=User.find([#ids of users])
-      # friends=User.find([3,4])
+      friends=User.find(JSON.parse params[:invitations])
 
-      # friends.each do |friend|
-      #   Invite.create(user:friend,order:@order)
-      # end
+      friends.each do |friend|
+        Invite.create(user:friend,order:@order)
+      end
 
       
       File.open(Rails.root.join('public', 'images', 'menus', uploaded_file.original_filename), 'wb') do |file|

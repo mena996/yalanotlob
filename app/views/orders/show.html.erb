@@ -14,6 +14,14 @@
             Finished
         <% end %>
     </div>
-    <td class="align-middle"><%= link_to 'details' ,"/user_orders/#{@order.id}", class: "btn btn-primary text-light" %></td>
+    <td class="align-middle"><%= link_to 'details' ,"/user_orders/#{@order.id}", class: "btn btn-primary text-light mt-2 mb-2" %></td>
     <div class='align-middle'> <img src="/images/menus/<%= @order.menu %>" width=400 /></div>
+
+
+    <h3>The people you invited :</h3>
+    <div class="container row" col-8>
+        <% @invited_users.each do |user| %>
+            <div class="alert alert-primary col-2 ml-3 text-center"><%= user.name %></div>
+        <% end %>
+    </div>
 </div>

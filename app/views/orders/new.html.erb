@@ -58,4 +58,12 @@
         invited_users.splice(invited_users.indexOf(parseInt(element.id)), 1)
     }
 
+
+    $("#new_order").submit( function(eventObj) {
+        $("<input />").attr("type", "hidden")
+            .attr("name", "invitations")
+            .attr("value", JSON.stringify(invited_users))
+            .appendTo("#new_order");
+        return true;
+    });
 </script>
