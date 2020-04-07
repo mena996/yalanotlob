@@ -35,4 +35,6 @@
 yarn-debug.log*
 .yarn-integrity
 
-/config/database.yml
+.idea
+public/images
+config/database.yml
