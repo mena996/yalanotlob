@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   post 'user_orders/create'
   get 'user_orders/index'
   delete 'user_orders/destroy'
+  get 'add_friend', to: 'home#addFriend', as: 'add_friend'
+  get 'add_group', to: 'home#addGroup', as: 'add_group'
   get 'home/index'
   post 'orders/:id/finish_order', to: 'orders#finish', as: 'finish_order'
   put 'invites/:id', to: 'invites#join'
