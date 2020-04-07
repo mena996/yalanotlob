@@ -112,7 +112,9 @@ body {
   padding-bottom: 0px;
   padding: 0px;
 }
-
+.notification-box :hover{
+  cursor: pointer;
+}
 .notification-menu:before {
   content: "";
   position: absolute;

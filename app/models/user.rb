@@ -16,5 +16,12 @@ class User < ApplicationRecord
                           :foreign_key => "first_user_id",
                           :association_foreign_key => "second_user_id"
   has_many :user_orders
+
+  #order
+  has_many :orders
+  
+  #notificatiom
+  has_many :notifications, foreign_key: "recipient_id"
+  has_many :invites
   
 end

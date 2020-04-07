@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_104619) do
+ActiveRecord::Schema.define(version: 2020_04_07_122051) do
 
   create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "first_user_id"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 2020_03_30_104619) do
     t.bigint "order_id"
     t.index ["order_id"], name: "index_invites_on_order_id"
     t.index ["user_id"], name: "index_invites_on_user_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "actor_id"
+    t.string "action"
+    t.datetime "read_at"
+    t.string "notifiable_id"
+    t.string "notifiable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "notified"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|

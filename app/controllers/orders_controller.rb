@@ -25,6 +25,14 @@ class OrdersController < ApplicationController
     fill_order_data(@order, params)
 
     if @order.save
+      # # assume we have array of friends ids firends=User.find([#ids of users])
+      # friends=User.find([3,4])
+
+      # friends.each do |friend|
+      #   Invite.create(user:friend,order:@order)
+      # end
+
+      
       File.open(Rails.root.join('public', 'images', 'menus', uploaded_file.original_filename), 'wb') do |file|
         file.write(uploaded_file.read)
       end
