@@ -37,9 +37,9 @@ class OrdersController < ApplicationController
 
 
 #####  here I'm expecting to get all the users in the group  #####
-#         group = Group.where(name: params[:order][:group])
-#         group_users = group.users  # this line needs to be replace with a working one
-#         friends += group_users
+        group = Group.where(name: params[:order][:group]).first
+        group_users = group.users  # this line needs to be replace with a working one
+        friends += group_users
 
         friends.each do |friend|
             Invite.create(user:friend,order:@order)
