@@ -3,11 +3,11 @@ class HomeController < ApplicationController
   end
 
   def addFriend 
-    p "heloooooooooooooooooooooo"
+    @friend = User.find(current_user.id).friends
   end 
   
   def addGroup
-    p "heloooooooooooooooooooooo"
+    @friend = User.find(current_user.id).friends
   end 
   
 end
