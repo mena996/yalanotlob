@@ -1,11 +1,19 @@
 <h1>Groups</h1>
-<%= form_with(url: "/search", method: "get") do %>
+<%= form_for(@newgroup,url: :add_new_group) do |form| %>
+  <% if @newgroup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul>
+        <% newfriend.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="field">
-    <%= label_tag(:q, "Group:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("add") %>
-  </div>
-  <div class="actions">
+    <%= form.label :"Group:" %>
+    <%= form.text_field :name %>
+    <%= form.submit %>
   </div>
 <% end %>
 <div class="container row ">
@@ -26,7 +34,7 @@
             </a>
           </div>
           <div class="col-2 mt-3 ml-1">
-            <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/group">
+            <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/group/<%=group.id%>">
               <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
                 <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
@@ -42,14 +50,24 @@
     <lable>group name</lable>
     <div id="future" class="border container col-12">
       <div class ="col-12 row justify-content-center mt-5">
-      <%if params[:id]%>
-        <%= form_with(url: "/search", method: "get") do %>
-          <div class="field">
-            <%= label_tag(:q, "your friend email:") %>
-            <%= text_field_tag(:q) %>
-            <%= submit_tag("add") %>
-          </div>
-        <% end %>
+        <%if params[:id]%>
+          <%= form_for(@newgroupuser,url: add_new_group_user_path(params[:id]) ) do |form| %>
+            <% if @newgroup.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+                <ul>
+                  <% newfriend.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="field">
+              <%= form.label :email %>
+              <%= form.text_field :email %>
+              <%= form.submit :"add friend"  %>
+            </div>
+          <% end %>
         <%end%>
       </div>
       <div class ="col-12 row justify-content-center overflowin-y container-group mt-3">
@@ -62,7 +80,9 @@
               <div class="col-md-7">
                 <div class="card-body">
                   <h5 class="card-title"><%=friend.name%></h5>
-                  <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
+                  <h5 class="card-title">
+                    <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/<%=params[:id]%>/group_user/<%=friend.id%>">remove</a>
+                  </h5>
                 </div>
               </div>
             </div>

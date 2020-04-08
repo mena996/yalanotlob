@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   delete 'user_orders/destroy'
   get 'add_friend', to: 'home#addFriend', as: 'add_friend'
   post 'add_new_friend', to: 'home#addNewFriend', as: 'add_new_friend'
+  post 'add_new_group', to: 'home#addNewGroup', as: 'add_new_group'
+  post 'add_new_group_user/:id', to: 'home#addNewGroupUser', as: 'add_new_group_user'
   get 'add_group', to: 'home#addGroup', as: 'add_group'
-  get 'add_group/:id', to: 'home#addGroup'
-  delete 'group', to: 'home#destroyGroup', as: :delete_group
+  get 'add_group/:id', to: 'home#addGroup',as: 'group'
+  delete 'group/:id', to: 'home#destroyGroup', as: :delete_group
+  delete ':gid/group_user/:uid', to: 'home#destroyGroupUser', as: :delete_group_user
   get 'home/index'
   post 'orders/:id/finish_order', to: 'orders#finish', as: 'finish_order'
   put 'invites/:id', to: 'invites#join'
