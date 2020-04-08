@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   #group relationship
-  has_many :owned_groups, class_name: 'Group', foreign_key: 'admin_id'
+  has_many :owned_groups, class_name: 'Group', foreign_key: 'admin_id',  dependent: :destroy
   has_and_belongs_to_many :groups, :join_table => "user_groups"
 
 
@@ -18,10 +18,12 @@ class User < ApplicationRecord
   has_many :user_orders
 
   #order
-  has_many :orders
+  has_many :orders , dependent: :destroy
   
   #notificatiom
-  has_many :notifications, foreign_key: "recipient_id"
-  has_many :invites
+  has_many :notifications, foreign_key: "recipient_id" , dependent: :destroy
+  has_many :invites , dependent: :destroy
+
   # validates_uniqueness_of :first_user_id, :scope => [:second_user_id, :source_id]
+
 end
