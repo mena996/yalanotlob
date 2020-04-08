@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
         group_users = group.users  # this line needs to be replace with a working one
         friends += group_users
 
-        friends.each do |friend|
+        friends.uniq.each do |friend|
             Invite.create(user:friend,order:@order)
         end
 
