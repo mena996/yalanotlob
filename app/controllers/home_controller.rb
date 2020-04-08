@@ -23,7 +23,6 @@ class HomeController < ApplicationController
   end
 
   def addNewGroupUser
-    p "heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
     p params[:id]
     p params[:user][:email]
     if Group.find(params[:id]).users << User.where("email=\""+params[:user][:email]+"\"")
@@ -63,9 +62,14 @@ class HomeController < ApplicationController
   end
 
   def destroyGroupUser
-    p "deleteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
     p params[:gid]
     p params[:uid]
+    if Group.find(params[:gid]).users.delete(User.find(params[:uid]))
+      redirect_to group_path(params[:gid])
+    else
+      format.html { render :add_friend }
+      format.json { render json: @group.errors, status: :unprocessable_entity }
     end
+  end
 end
  
