@@ -1,7 +1,7 @@
 // Place all the styles related to the user_orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.flex{
+.flex {
     display: flex;
     flex-wrap: wrap;
 }
@@ -15,14 +15,22 @@
 //     height: 40px;
 //     margin: 5px;
 // }
-.overflowin-y{
+.overflowin-y {
     overflow-y: scroll;
+}
+
+.container-group {
+    height: 42rem;
+}
+.container-group-user {
     height: 50rem;
 }
-.card-height{
-    height:15%;
+
+.card-height {
+    height: 18%;
 }
-.h{
-    color:midnightblue;
+
+.h {
+    color: midnightblue;
     font-weight: bold;
 }

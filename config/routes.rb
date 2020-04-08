@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   get 'user_orders/index'
   delete 'user_orders/destroy'
   get 'add_friend', to: 'home#addFriend', as: 'add_friend'
+  post 'add_new_friend', to: 'home#addNewFriend', as: 'add_new_friend'
   get 'add_group', to: 'home#addGroup', as: 'add_group'
+  get 'add_group/:id', to: 'home#addGroup'
+  delete 'group', to: 'home#destroyGroup', as: :delete_group
   get 'home/index'
   post 'orders/:id/finish_order', to: 'orders#finish', as: 'finish_order'
   put 'invites/:id', to: 'invites#join'
+
   resources :orders
   resources :user_orders
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,13 +1,25 @@
 <h1>Friends</h1>
-<%= form_with(url: "/search", method: "get") do %>
+<%= form_for(@newfriend,url: :add_new_friend) do |form| %>
+  <% if @newfriend.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+        <% newfriend.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field">
-    <%= label_tag(:q, "your friend email:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("add") %>
-  </div>
-  <div class="actions">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+    <%= form.submit %>
   </div>
 <% end %>
+
+
 <lable>your Friends</lable>
 <div id="future" class="border container col-12 row justify-content-center">
   <% @friend.each do |friend| %>

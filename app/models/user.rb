@@ -23,5 +23,5 @@ class User < ApplicationRecord
   #notificatiom
   has_many :notifications, foreign_key: "recipient_id"
   has_many :invites
-  
+  # validates_uniqueness_of :first_user_id, :scope => [:second_user_id, :source_id]
 end

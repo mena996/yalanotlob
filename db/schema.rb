@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_122051) do
   create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "first_user_id"
     t.bigint "second_user_id"
+    t.index ["first_user_id", "second_user_id"], name: "index_friends_on_first_user_id_and_second_user_id", unique: true
     t.index ["first_user_id"], name: "index_friends_on_first_user_id"
     t.index ["second_user_id"], name: "index_friends_on_second_user_id"
   end
