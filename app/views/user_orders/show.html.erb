@@ -1,6 +1,7 @@
 <h1>Order Details</h1>
 
 <div class="container">   
+<div>
 <div class="float-md-right" >
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user_order">
   <%= @invited.length.to_s+' friends are invented'%>
@@ -47,18 +48,30 @@
 <%# order details form %>
 <div class="well">
 
-<%= form_with(url: "/user_orders",local:true, class: "form-inline") do |f|  %>
-    <%= hidden_field_tag(:user_id, current_user.id ) %>
-    <%= hidden_field_tag(:order_id, @order.id) %>
-    <%= f.text_field(:item_name, class:"form-control" , placeholder:"item...." ) %>
-    <%= f.number_field :amount, class: "form-control", placeholder: "amount",min: 0, step: 1  %>
-    <%= f.number_field :price, class: "form-control", placeholder: "price",min: 0, step: 0.5  %>
-    <%= f.text_field(:comment, class:"form-control" , placeholder:"comment...." ) %>
-    <%= f.submit( 'add', class:"btn btn-info")  %>
-<% end %>
-    
+    <%= form_with(url: "/user_orders",local:true, class: "form-inline") do |f|  %>
+        <%= hidden_field_tag(:user_id, current_user.id ) %>
+        <%= hidden_field_tag(:order_id, @order.id) %>
+        <%= f.text_field(:item_name, class:"form-control" , placeholder:"item...." ) %>
+        <%= f.number_field :amount, class: "form-control", placeholder: "amount",min: 0, step: 1  %>
+        <%= f.number_field :price, class: "form-control", placeholder: "price",min: 0, step: 0.5  %>
+        <%= f.text_field(:comment, class:"form-control" , placeholder:"comment...." ) %>
+        <%= f.submit( 'add', class:"btn btn-info")  %>
+    <% end %>
+  </div>
 </div>
-
+    <% if $errors.length != 0 %> 
+          <div class="alert alert-danger">
+            <ul>
+            <% $errors.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <% $errors = [] %>
+    
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="user_order" tabindex="-1" role="dialog" aria-labelledby="user_orderTitle" aria-hidden="true">

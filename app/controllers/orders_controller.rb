@@ -1,5 +1,5 @@
-class OrdersController < ApplicationController
 
+class OrdersController < ApplicationController
 
   def index
     @orders = Order.order(:status)

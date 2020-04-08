@@ -1,5 +1,7 @@
 class UserOrdersController < ApplicationController
 
+
+    $errors = []
     def index
     end
 
@@ -8,9 +10,7 @@ class UserOrdersController < ApplicationController
 
     def create
       @user_order = UserOrder.create(user_order_params)
-      if @user_order.save           
-      else
-      end
+      $errors =@user_order.errors.full_messages 
       redirect_to user_order_path(id: params[:order_id]) 
 
     end
@@ -32,9 +32,7 @@ class UserOrdersController < ApplicationController
 
     end
 
-    
-
-
+  
     private
     def user_order_params
       params.permit(:user_id, :order_id, :item_name, :amount, :price, :comment)
