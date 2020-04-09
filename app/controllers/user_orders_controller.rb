@@ -17,8 +17,8 @@ class UserOrdersController < ApplicationController
 
     def show
       @order = Order.find(params[:id])
-      @invited = Invite.where(order_id: params[:id])
-      @joined = Invite.where(order_id: params[:id]).where(invitation_status: 1)
+      @invited = @order.invites.where(order_id: params[:id])
+      @joined = @order.invites.where(order_id: params[:id]).where(invitation_status: 1)
       @orderDetails = UserOrder.where(order_id: params[:id]);
 
 
@@ -32,7 +32,6 @@ class UserOrdersController < ApplicationController
 
     end
 
-  
     private
     def user_order_params
       params.permit(:user_id, :order_id, :item_name, :amount, :price, :comment)

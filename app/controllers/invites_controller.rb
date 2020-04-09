@@ -8,4 +8,11 @@ class InvitesController < ApplicationController
         end
         redirect_back fallback_location: root_path
     end
+
+    def destroy
+        @invitaion = Invite.find(params[:id])
+        @id = @invitaion.order_id
+        @invitaion.destroy
+        redirect_to user_order_path(id: @id) 
+    end
 end

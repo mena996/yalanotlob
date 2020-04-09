@@ -1,7 +1,6 @@
 <h1>Order Details</h1>
 
 <div class="container">   
-<div>
 <div class="float-md-right" >
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user_order">
   <%= @invited.length.to_s+' friends are invented'%>
@@ -57,7 +56,8 @@
         <%= f.text_field(:comment, class:"form-control" , placeholder:"comment...." ) %>
         <%= f.submit( 'add', class:"btn btn-info")  %>
     <% end %>
-  </div>
+    
+ </div>
 </div>
     <% if $errors.length != 0 %> 
           <div class="alert alert-danger">
@@ -69,12 +69,12 @@
           </div>
         <% end %>
         <% $errors = [] %>
-    
+
   </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="user_order" tabindex="-1" role="dialog" aria-labelledby="user_orderTitle" aria-hidden="true">
+<div class="modal" id="user_order" tabindex="-1" role="dialog" aria-labelledby="user_orderTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -84,26 +84,49 @@
         </button>
       </div>
       <div class="modal-body">
-        <%# my part %>
-        <h4 class="h">Friends invented</h4>
-        <div class="flex">
-            <% @invited.each do |friend| %> 
-              <div class="card">
-                <span><%= friend.user.name%></span>
-                        <a>remove</a>
-                          <%# <%= link_to "delete", "/invites/#{friend.id}", remote: true, method: :delete , class:"remove"%>
-                </div>
-              <% end %>
-        </div> 
 
-        <h4 class="h">Friends joined</h4>
-        <div class="flex">
-            <% @joined.each do |friend| %>
-              <div class="card">
-                <p><%= friend.user.name%></p>
+        <h4 class="h">Friends invented:</h4>
+        <%if @invited.empty?%>
+          <p>No friends are invited </p>
+        <% else %>
+        <div class="d-flex flex-wrap ">
+            <% @invited.each do |friend| %> 
+             <div class="card ml-3 mb-2" style="width:30%;" >
+                <div class="d-flex p-1" >  
+                  <div class="w-25">
+                    <img src="/images/icon.jpg" class="img-fluid">
+                  </div>
+                  <div class="card-body p-0">
+                    <h4 class="card-title m-2 p-0"><%= friend.user.name %></h4>
+                    <%if current_user.id == @order.user_id%>
+                      <p class="card-text m-2 p-0"><%= link_to "delete", "/invites/#{friend.id}", remote: true, method: :delete , class:"remove"%></p>                 
+                    <%end%>
+                  </div>
+                </div>  
+              </div>
+            <% end %>
+        </div> 
+      <% end %>
+
+        <h4 class="h">Friends joined:</h4>
+         <%if @joined.empty?%>
+          <p>No friends join </p>
+        <% else %>
+        <div class="d-flex flex-wrap ">
+        <% @joined.each do |friend| %> 
+             <div class="card ml-3 mb-2" style="width:30%;" >
+              <div class="d-flex p-1" >  
+                  <div class="w-25">
+                    <img src="/images/icon.jpg" class="img-fluid">
+                  </div>
+                  <div class="card-body p-0">
+                    <h4 class="card-title m-2 p-0"><%= friend.user.name %></h4>
+                  </div>
+                </div>
               </div>
             <% end %>
          </div> 
+      <% end %>
 
       </div>
       <div class="modal-footer">
