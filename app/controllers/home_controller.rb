@@ -6,6 +6,14 @@ class HomeController < ApplicationController
     @newfriend = User.new
     @friend = User.find(current_user.id).friends
   end 
+  def removeFriend
+    if User.find(current_user.id).friends.delete(User.find(params[:id]))
+      redirect_to add_friend_path
+    else
+      format.html { render :add_friend }
+      format.json { render json: @newfriend.errors, status: :unprocessable_entity }
+    end
+  end
 
   def addNewGroup
     @group = Group.new()
@@ -62,8 +70,6 @@ class HomeController < ApplicationController
   end
 
   def destroyGroupUser
-    p params[:gid]
-    p params[:uid]
     if Group.find(params[:gid]).users.delete(User.find(params[:uid]))
       redirect_to group_path(params[:gid])
     else
