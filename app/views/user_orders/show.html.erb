@@ -99,7 +99,8 @@
                   <div class="card-body p-0">
                     <h4 class="card-title m-2 p-0"><%= friend.user.name %></h4>
                     <%if current_user.id == @order.user_id%>
-                      <p class="card-text m-2 p-0"><%= link_to "delete", "/invites/#{friend.id}", remote: true, method: :delete , class:"remove"%></p>                 
+                      <p class="card-text m-2 p-0"><%= link_to "delete", "/invites/#{friend.id}", remote: true, 
+                      method: :delete , class:"remove", data: { confirm: 'Are you sure?'}%></p>                 
                     <%end%>
                   </div>
                 </div>  

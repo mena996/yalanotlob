@@ -11,6 +11,7 @@ class InvitesController < ApplicationController
 
     def destroy
         @invitaion = Invite.find(params[:id])
+        UserOrder.where(user_id: @invitaion.user_id).destroy_all
         @id = @invitaion.order_id
         @invitaion.destroy
         redirect_to user_order_path(id: @id) 
