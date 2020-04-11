@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/index'
   get 'add_friend', to: 'home#addFriend', as: 'add_friend'
   get 'add_group', to: 'home#addGroup', as: 'add_group'
   get 'home/index'
