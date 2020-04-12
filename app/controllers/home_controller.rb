@@ -38,13 +38,24 @@ class HomeController < ApplicationController
   end
 
   def addNewGroupUser
-    p params[:id]
-    p params[:user][:email]
-    if Group.find(params[:id]).users << User.where("email=\"" + params[:user][:email] + "\"")
-      redirect_to group_path(params[:id])
+    if User.find(current_user.id).friends.where("email=\"" + params[:user][:email] + "\"").exists?
+      if !Group.find(params[:id]).users.where("email=\"" + params[:user][:email] + "\"").exists?
+        if Group.find(params[:id]).users << User.find(current_user.id).friends.where("email=\"" + params[:user][:email] + "\"")
+          redirect_to group_path(params[:id])
+        else
+          # render :add_friend
+          # render json: @group.errors, status: :unprocessable_entity
+          format.html { redirect_to "/add_group", notice: @group.errors }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to "/add_group/" + params[:id], notice: "user already in the group" }
+        end
+      end
     else
-      ender :add_friend
-      render json: @group.errors, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { redirect_to "/add_group/" + params[:id], notice: "user does not exist" }
+      end
     end
   end
 
@@ -88,10 +99,15 @@ class HomeController < ApplicationController
 
   def destroyGroupUser
     if Group.find(params[:gid]).users.delete(User.find(params[:uid]))
-      redirect_to group_path(params[:gid])
+      # redirect_to group_path(params[:gid])
+      respond_to do |format|
+        format.html { redirect_to group_path(params[:gid]), notice: "the user was successfully deleted." }
+      end
     else
-      format.html { render :add_friend }
-      format.json { render json: @group.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        format.html { render :add_friend }
+        format.json { render json: @group.errors, status: :unprocessable_entity }
+      end
     end
   end
 end
