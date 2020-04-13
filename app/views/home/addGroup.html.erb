@@ -1,477 +1,94 @@
 <h1>Groups</h1>
-<%= form_with(url: "/search", method: "get") do %>
+<%= form_for(@newgroup,url: :add_new_group) do |form| %>
+  <% if @newgroup.errors.any? %>
+    <div cl="aler alert-danger">
+      <ul>
+        <% @newgroup.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="field">
-    <%= label_tag(:q, "Group:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("add") %>
-  </div>
-  <div class="actions">
+    <%= form.label :"Group:" %>
+    <%= form.text_field :name %>
+    <%= form.submit %>
   </div>
 <% end %>
 <div class="container row ">
   <div class="container col-4">
     my Groups 
-    <div id="future" class="border container col-12 justify-content-center overflowin-y " style="overflow-y: scroll;">
-      <div class="row m-2 col-12" >
-        <div class="col-7 mt-2">
-          <h4 class="card-title">Card title</h4>
+    <div id="future" class="border container col-12 justify-content-center overflowin-y container-group-user" style="overflow-y: scroll;">
+      <% @group.each do |group| %>
+        <div class="row m-2 col-12" >
+          <div class="col-7 mt-2">
+            <h4 class="card-title"><%=group.name%></h4>
+          </div>
+          <div class="col-2 mt-3 ml-1">
+            <a href="/add_group/<%=group.id%>">
+              <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+          </div>
+          <div class="col-2 mt-3 ml-1">
+            <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/group/<%=group.id%>">
+              <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+          </div>
         </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="row m-2 col-12" >
-        <div class="col-7 mt-2">
-          <h4 class="card-title">Card title</h4>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="row m-2 col-12" >
-        <div class="col-7 mt-2">
-          <h4 class="card-title">Card title</h4>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="row m-2 col-12" >
-        <div class="col-7 mt-2">
-          <h4 class="card-title">Card title</h4>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="row m-2 col-12" >
-        <div class="col-7 mt-2">
-          <h4 class="card-title">Card title</h4>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="row m-2 col-12" >
-        <div class="col-7 mt-2">
-          <h4 class="card-title">Card title</h4>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="row m-2 col-12" >
-        <div class="col-7 mt-2">
-          <h4 class="card-title">Card title</h4>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="row m-2 col-12" >
-        <div class="col-7 mt-2">
-          <h4 class="card-title">Card title</h4>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-person-plus-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-        <div class="col-2 mt-3 ml-1">
-          <a href="#">
-            <svg class="bi bi-x-circle" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      
-      
-      
-      
-      
-      
-      
+      <% end %>
     </div>
   </div>
   <div class="container col-8">
     <lable>group name</lable>
     <div id="future" class="border container col-12">
       <div class ="col-12 row justify-content-center mt-5">
-        <%= form_with(url: "/search", method: "get") do %>
-          <div class="field">
-            <%= label_tag(:q, "your friend email:") %>
-            <%= text_field_tag(:q) %>
-            <%= submit_tag("add") %>
+        <%if params[:id]%>
+          <%= form_for(@newgroupuser,url: add_new_group_user_path(params[:id]) ) do |form| %>
+            <% if @newgroup.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+                <ul>
+                  <% newfriend.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="field">
+              <%= form.label :email %>
+              <%= form.text_field :email %>
+              <%= form.submit :"add friend"  %>
+            </div>
+          <% end %>
+        <%end%>
+      </div>
+      <div class ="col-12 row justify-content-center overflowin-y container-group mt-3">
+        <% @friend.each do |friend| %>
+          <div class="card  col-6 card-height" >
+            <div class="row no-gutters col-12">
+              <div class="col-3 m-2">
+                <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <h5 class="card-title"><%=friend.name%></h5>
+                  <h5 class="card-title">
+                    <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/<%=params[:id]%>/group_user/<%=friend.id%>">remove</a>
+                  </h5>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
-      </div>
-      <div class ="col-12 row justify-content-center overflowin-y ">
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card  col-6 card-height" >
-          <div class="row no-gutters col-12">
-            <div class="col-3 m-2">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h5 class="card-title"><a href="removeFriend/id">remove</a></h5>
-              </div>
-            </div>
-          </div>
+        <div>
         </div>
       </div>
     </div>
   </div>
-</div>

@@ -11,6 +11,8 @@
       <th class="text-center">Meal</th>
       <th class="text-center">Restaurant</th>
       <th class="text-center">Menu</th>
+      <th class="text-center">invited</th>
+      <th class="text-center">joined</th>
       <th class="text-center">Status</th>
       <th class="text-center" colspan="3">Actions</th>
     </tr>
@@ -28,6 +30,14 @@
         </td>
         <td class='align-middle'> <%= order.restaurant %></td>
         <td class='align-middle'> <img src="images/menus/<%= order.menu %>" width=200 /></td>
+        <td class='align-middle'> <%= order.invites.length %></td>
+        <% joined = 0 %>
+        <% order.invites.each do |invite| %>
+            <% if invite.invitation_status %>
+                <% joined += 1 %>
+            <% end %>
+        <% end %>
+        <td class='align-middle'> <%= joined %></td>
         <td class='align-middle'>
           <% if(order.status == 0) %>
             Waiting

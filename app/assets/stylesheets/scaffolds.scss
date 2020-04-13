@@ -36,10 +36,16 @@
 // #notice {
 //   color: green; }
 
-// .field_with_errors {
-//   padding: 2px;
-//   background-color: red;
-//   display: table; }
+.field_with_errors {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 2px;
+    background-color: red;
+    display: table;
+}
+.field{
+    display: flex;
+}
 
 // #error_explanation {
 //   width: 450px;
