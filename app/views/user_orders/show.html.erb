@@ -24,6 +24,9 @@
     </tr>
   </thead>
   <tbody>
+  <%if @orderDetails.empty?%>
+    <tr><td colspan="7" style="text-align:center;"> ........... No orders yet ........... </td></tr>
+    <%else%>
    <%i = 0 %>
     <% @orderDetails.each do |detail| %>
         <tr>
@@ -36,10 +39,13 @@
             <td>
             <% if detail.user.id == current_user.id  %>
               <%= link_to "delete", "/user_orders/#{detail.id}", remote: true, method: :delete , class:"remove",
-              data: { confirm: 'Are you sure?'} %> 
+              data: { confirm: 'Are you sure?'} %>
+              <%else%> 
+              ..........
              <% end %>
              </td>
         </tr>
+        <%end%>
     <% end %>
   </tbody>
 </table>
