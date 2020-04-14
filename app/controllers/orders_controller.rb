@@ -2,7 +2,14 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = Order.order(:status)
+    my_orders = current_user.orders
+    invites = current_user.invites
+    invited_to_orders = []
+    invites.each do |invite|
+      invited_to_orders.push(invite.order)
+    end
+
+    @orders = my_orders + invited_to_orders
   end
 
   def show
@@ -33,24 +40,21 @@ class OrdersController < ApplicationController
     fill_order_data(@order, params)
 
     if @order.save
-        friends=User.find(JSON.parse params[:invitations])
-
-
-      
-        group = Group.where(name: params[:order][:group]).first
+      friends=User.find(JSON.parse params[:invitations])  
+      group = Group.where(name: params[:order][:group]).first
       if group
-        group_users = group.users  # this line needs to be replace with a working one
+        group_users = group.users
         friends += group_users
       end
 
-        (friends.uniq-[current_user]).each  do |friend|
-            Invite.create(user:friend,order:@order)
-        end
+      (friends.uniq-[current_user]).each  do |friend|
+          Invite.create(user:friend,order:@order)
+      end
 
-        File.open(Rails.root.join('public', 'images', 'menus', uploaded_file.original_filename), 'wb') do |file|
-            file.write(uploaded_file.read)
-        end
-        redirect_to :orders
+      File.open(Rails.root.join('public', 'images', 'menus', uploaded_file.original_filename), 'wb') do |file|
+          file.write(uploaded_file.read)
+      end
+      redirect_to :orders
     else
     render :new
     end
