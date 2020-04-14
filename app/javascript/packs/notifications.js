@@ -50,7 +50,7 @@ const handelSuccess = function (data) {
     if (!notification.notified){
       UnotifiedCount+=1
     }
-    let html = `<li id=${notification.id} class='notification-box ${notification.read? "":"bg-gray"}'> 
+    let html = `<li data-id=${notification.id} id=${notification.id} class='notification-box ${notification.read? "":"bg-gray"}'> 
       <div class='row'> <div class='col-lg-3 col-sm-3 col-3 text-center'> 
       <img src='/avatar.png' class='w-50 rounded-circle'> </div>
        <div class='col-lg-8 col-sm-8 col-8'> <strong class='text-info'>${notification.actor}</strong> <div> ${notification.actor} ${notification.action} ${(notification.type === 'invite' ? 'order' : void 0)}. `
@@ -81,13 +81,13 @@ const handelSuccess = function (data) {
 notifications()
 
 $(document).on('click', '.notification-box', function (e) {
-  let id = $(this).attr('id')
+  let id = $(this).attr('data-id')
   $.ajax({
-    url: `/notifications/${$(this).attr('id')}/mark_one_as_read`,
+    url: `/notifications/${id}/mark_one_as_read`,
     dataType: "JSON",
     method: "POST",
     success: function () {
-      console.log(id);
+      $(`#view_all_${id}`).attr('class', 'notification-box list-group-item');
       $(`#${id}`).attr('class', 'notification-box');
     }
   });
@@ -98,4 +98,4 @@ $(document).on('click', '.dropdown-menu', function (e) {
   e.stopPropagation();
 });
 
-// setInterval(notifications, 2000);
+setInterval(notifications, 15*1000);
