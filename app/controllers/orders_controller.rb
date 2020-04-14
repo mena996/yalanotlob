@@ -36,12 +36,14 @@ class OrdersController < ApplicationController
         friends=User.find(JSON.parse params[:invitations])
 
 
-#####  here I'm expecting to get all the users in the group  #####
+      
         group = Group.where(name: params[:order][:group]).first
+      if group
         group_users = group.users  # this line needs to be replace with a working one
         friends += group_users
+      end
 
-        friends.uniq.each do |friend|
+        (friends.uniq-[current_user]).each  do |friend|
             Invite.create(user:friend,order:@order)
         end
 
