@@ -1,30 +1,30 @@
 <h1>Friends</h1>
-  <% if @errors %>
-    <div class="alert alert-danger"><%= @errors %></div>
-  <% end %>
+<% if @errors %>
+<div class="alert alert-danger"><%= @errors %></div>
+<% end %>
 <%= form_for(@newfriend,url: :add_new_friend) do |form| %>
-  <div class="field">
+<div class="field">
     <%= form.label :email %>
     <%= form.text_field :email %>
-    <%= form.submit %>
-  </div>
+    <%= form.submit 'Add as a Friend' %>
+</div>
 <% end %>
 <lable>your Friends</lable>
 <div id="future" class="border container col-12 row justify-content-center">
-  <% @friend.each do |friend| %>
-    <div class="card m-3 col-3" >
-      <div class="row no-gutters col-12">
-        <div class="col-md-4 mt-3 ml-1">
-          <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
+    <% @friend.each do |friend| %>
+    <div class="card m-3 col-3">
+        <div class="row no-gutters col-12">
+            <div class="col-md-4 mt-3 ml-1">
+                <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="card-img" alt="...">
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h5 class="card-title"><%= friend.name %></h5>
+                    <%# link_to 'Edit', edit_comment_path(comment)  %>
+                    <h5 class="card-title"><a href="remove_friend/<%=friend.id%>">unFriend</a></h5>
+                </div>
+            </div>
         </div>
-        <div class="col-md-7">
-          <div class="card-body">
-            <h5 class="card-title"><%= friend.name %></h5>
-            <%# link_to 'Edit', edit_comment_path(comment)  %>
-            <h5 class="card-title"><a href="remove_friend/<%=friend.id%>">unFriend</a></h5>
-          </div>
-        </div>
-      </div>
     </div>
-  <% end %>
+    <% end %>
 </div>
