@@ -10,9 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 2020_04_07_194310) do
+=======
 ActiveRecord::Schema.define(version: 2020_04_07_122051) do
+>>>>>>> 0c8cc007213409588d66667a354c8652ddade482
 
-  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "friends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "first_user_id"
     t.bigint "second_user_id"
     t.index ["first_user_id", "second_user_id"], name: "index_friends_on_first_user_id_and_second_user_id", unique: true
@@ -20,13 +24,13 @@ ActiveRecord::Schema.define(version: 2020_04_07_122051) do
     t.index ["second_user_id"], name: "index_friends_on_second_user_id"
   end
 
-  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.bigint "admin_id"
     t.index ["admin_id"], name: "index_groups_on_admin_id"
   end
 
-  create_table "invites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "invites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "notified"
     t.string "invitation_status"
     t.bigint "user_id"
@@ -53,17 +57,18 @@ ActiveRecord::Schema.define(version: 2020_04_07_122051) do
     t.string "menu"
     t.integer "status"
     t.bigint "user_id"
+    t.timestamp "created_at"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "user_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "user_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "group_id"
     t.index ["group_id"], name: "index_user_groups_on_group_id"
     t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
-  create_table "user_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "user_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "item_name"
     t.integer "amount"
     t.decimal "price", precision: 10
@@ -74,7 +79,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_122051) do
     t.index ["user_id"], name: "index_user_orders_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name", default: "", null: false

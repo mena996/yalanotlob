@@ -9,8 +9,14 @@ class UserOrdersController < ApplicationController
     end 
 
     def create
-      @user_order = UserOrder.create(user_order_params)
-      $errors =@user_order.errors.full_messages 
+      @invited = Invite.where(order_id: params[:order_id]).where(user_id: current_user.id).where(invitation_status: 1).exists?
+      @orderOwner = Order.where(id: params[:order_id]).where(user_id: current_user.id).exists?
+      if @invited == true || @orderOwner == true
+        @user_order = UserOrder.create(user_order_params)
+        $errors =@user_order.errors.full_messages       
+      else
+        $errors.push("Sorry...NOT JOINED!  you are not allowed to add orders.")
+      end
       redirect_to user_order_path(id: params[:order_id]) 
 
     end

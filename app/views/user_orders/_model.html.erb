@@ -1,29 +1,4 @@
 
-<div class="modal-header">
-  <h4 class="modal-title" id="myModalLabel">Invitations</h4>
-</div>
-<div class="modal-body">
-  <h4 class="h">Friends invented</h4>
-        <div class="flex">
-            <% @invited.each do |friend| %> 
-              <div class="card">
-                <span><%= friend.user.name%></span>
-                        <a>remove</a>
-                          <%# <%= link_to "delete", "/invites/#{friend.id}", remote: true, method: :delete , class:"remove"%>
-                </div>
-              <% end %>
-        </div> 
-
-        <h4 class="h">Friends joined</h4>
-        <div class="flex">
-            <% @joined.each do |friend| %>
-              <div class="card">
-                <p><%= friend.user.name%></p>
-              </div>
-            <% end %>
-         </div> 
-
-</div>
 
 
 

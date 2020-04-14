@@ -11,16 +11,19 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  database: yalanotlob
+  host: 127.0.0.1
   username: root
   password: 
-  host: 127.0.0.1 
-  #  socket: /tmp/mysql.sock
+  encoding: utf8mb4
+  
 
 development:
   <<: *default
-  database: yalanotlob
+  socket: /tmp/mysql.sock
+  host: 127.0.0.1
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
